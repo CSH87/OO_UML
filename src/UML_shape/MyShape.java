@@ -25,4 +25,6 @@ public abstract class MyShape {
     public abstract void draw(Graphics g);
     public void show(Graphics g){}
     public void resetSelectedShape(){}
+    public void resetLocation(){} 
+	public void resetLocation(int moveX, int moveY){} 
 }

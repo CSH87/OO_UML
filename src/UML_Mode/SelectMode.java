@@ -1,4 +1,5 @@
 package UML_Mode;
+import UML_shape.Line;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -12,15 +13,22 @@ import UML_shape.MyShape;
 public class SelectMode extends Mode{
     private List<MyShape> shapes;
     private Point startP = null;
+    private String tmpInside = null;
+    private Line selectedLine = null;
     public void mousePressed(MouseEvent e){
         System.out.println("Select mode");
+        //initialization
         canvas.SelectedArea =new Rectangle();
+        canvas.selectedObj=null;
+        tmpInside = null;
         startP = e.getPoint();
         shapes = canvas.getShapeList();
+        
         System.out.println(shapes.size());
         for(int i = 0;i<shapes.size();i++){
             MyShape shape = shapes.get(i);
-            if (shape.inside(e.getPoint()) != null){
+            tmpInside = shape.inside(e.getPoint());
+            if (tmpInside != null){
                 System.out.println("Inside");
                 canvas.selectedObj = shape;
                 break;
@@ -32,7 +40,16 @@ public class SelectMode extends Mode{
         int moveX = e.getX() - startP.x;
         int moveY = e.getY() - startP.y;
         if(canvas.selectedObj != null){
-
+            if (tmpInside == "insideLine") {
+				selectedLine = (Line) canvas.selectedObj;
+				selectedLine.resetStartEnd(e.getPoint());
+				canvas.tempLine = selectedLine;
+			}
+			else {
+				canvas.selectedObj.resetLocation(moveX, moveY);
+			}
+			startP.x = e.getX();
+			startP.y = e.getY();
         }
         else{
             System.out.println("drag");
