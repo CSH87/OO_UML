@@ -43,7 +43,6 @@ public class Canvas extends JPanel{
 		addMouseMotionListener((MouseMotionListener) listener);
 	}
 	public void addShape(MyShape shape) {
-		System.out.println("add Shape");
 		shapes.add(shape);
 	}
 	public List<MyShape> getShapeList() {
@@ -72,6 +71,17 @@ public class Canvas extends JPanel{
 		/* paint dragged line */
 		if (tempLine != null) {
 			tempLine.draw(g);
+		}
+		if (selectedObj != null) {
+			selectedObj.show(g);
+		}
+		if (!SelectedArea.isEmpty()) {
+			int alpha = 100;
+			g.setColor(new Color(20, 150, 200, alpha));
+			g.fillRect(SelectedArea.x, SelectedArea.y, SelectedArea.width, SelectedArea.height);
+			g.setColor(new Color(20, 150, 200));
+			g.drawRect(SelectedArea.x, SelectedArea.y, SelectedArea.width, SelectedArea.height);
+
 		}
 	}
 }

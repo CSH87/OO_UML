@@ -21,7 +21,7 @@ public abstract class Object extends MyShape{
 		center.x = (x1 + x2) / 2;
 		center.y = (y1 + y2) / 2;
 		Point[] points = { new Point(x1, y1), new Point(x2, y1), new Point(x2, y2), new Point(x1, y2) };
-		
+		System.out.println("test");
 		for (int i = 0; i < points.length; i++) {
 			Polygon t = new Polygon();
 			int secondIndex = ((i + 1) % 4);
@@ -44,8 +44,8 @@ public abstract class Object extends MyShape{
 		return ports[portIndex];
 	}
     public void setPorts(){
-        int[] x = {x1+x2/2, x2+offset, x1+x2/2, x1-offset};
-        int[] y = {y1-offset, y1+y2/2, y2+offset, y1+y2/2};
+        int[] x = {(x1+x2)/2, x2+offset, (x1+x2)/2, x1-offset};
+        int[] y = {y1-offset, (y1+y2)/2, y2+offset, (y1+y2)/2};
         for(int i = 0; i < ports.length; i++) {
 			Port port = new Port();
 			port.setPort(x[i], y[i], offset);

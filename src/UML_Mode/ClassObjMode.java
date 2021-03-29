@@ -12,7 +12,6 @@ public class ClassObjMode extends Mode{
     @Override
     public void mouseClicked(MouseEvent e){        
         MyShape shape = factory.createObj(objtype, e.getPoint());
-        System.out.println("press");
         canvas.addShape(shape);
 		canvas.repaint();
     }

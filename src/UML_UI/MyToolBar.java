@@ -6,12 +6,15 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.GridLayout;
 public class MyToolBar extends JToolBar{
-    private int toolNum = 6;
+    private int toolNum = 3;
     private Canvas canvas;
     private JButton holdBtn = null;
     public MyToolBar(){
         canvas = Canvas.getInstance();
+        setLayout(new GridLayout(toolNum, 1));
+        this.setBackground(new Color(83, 85, 87));
         ImageIcon selectIcon = new ImageIcon("img/select.png");
         ToolBtn selectBtn = new ToolBtn("select", selectIcon, new SelectMode());
         add(selectBtn);
@@ -51,7 +54,6 @@ public class MyToolBar extends JToolBar{
                 if(holdBtn != null){
                     holdBtn.setBackground(new Color(50,50,50));
                 }
-                System.out.println("button event");
                 holdBtn = (JButton) e.getSource();
 				holdBtn.setBackground(new Color(60,170,175));
                 canvas.currentMode = toolMode;

@@ -3,16 +3,17 @@ import java.awt.Graphics;
 
 import javax.management.ObjectName;
 
-public class ClassObj extends MyShape{
+public class ClassObj extends Object{
    
     public ClassObj(int x,int y){
         this.width = 100;
         this.height = 125;
         this.x1 = x;
-        this.x2 = x + this.width;
+        this.x2 = x + width;
         this.y1 = y;
-        this.y2 = y + this.height;
+        this.y2 = y + height;
         this.objName = "Class";
+        setPorts();
     }
     public void draw(Graphics g){
         g.drawRect(x1,y1,width,height);

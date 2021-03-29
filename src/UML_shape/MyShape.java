@@ -23,6 +23,6 @@ public abstract class MyShape {
 		return null;
 	}
     public abstract void draw(Graphics g);
+    public void show(Graphics g){}
     public void resetSelectedShape(){}
-    public abstract void test();
 }
