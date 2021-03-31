@@ -2,7 +2,6 @@ package UML_shape;
 
 import java.awt.Graphics;
 
-import jdk.jfr.internal.settings.ThresholdSetting;
 public class AssociateLine extends Line{
     private int arrowW=10, arrowH=10;
     public AssociateLine(int x1, int y1, int x2, int y2){

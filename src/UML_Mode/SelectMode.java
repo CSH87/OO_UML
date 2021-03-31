@@ -6,36 +6,36 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.awt.Rectangle;
 
-import org.graalvm.compiler.core.common.RetryableBailoutException;
 
 import UML_shape.MyShape;
+import jdk.internal.vm.compiler.word.Pointer;
 
 public class SelectMode extends Mode{
     private List<MyShape> shapes;
     private Point startP = null;
     private String tmpInside = null;
     private Line selectedLine = null;
+    @Override
     public void mousePressed(MouseEvent e){
-        System.out.println("Select mode");
         //initialization
         canvas.SelectedArea =new Rectangle();
         canvas.selectedObj=null;
         tmpInside = null;
+        canvas.selectRelease = false;
         startP = e.getPoint();
         shapes = canvas.getShapeList();
         
-        System.out.println(shapes.size());
         for(int i = 0;i<shapes.size();i++){
             MyShape shape = shapes.get(i);
             tmpInside = shape.inside(e.getPoint());
             if (tmpInside != null){
-                System.out.println("Inside");
                 canvas.selectedObj = shape;
                 break;
             }
         }
         canvas.repaint();
     }
+    @Override
     public void mouseDragged(MouseEvent e){
         int moveX = e.getX() - startP.x;
         int moveY = e.getY() - startP.y;
@@ -52,7 +52,7 @@ public class SelectMode extends Mode{
 			startP.y = e.getY();
         }
         else{
-            System.out.println("drag");
+            
 			if (e.getX() > startP.x && e.getY() > startP.y){
 				canvas.SelectedArea.setBounds(startP.x, startP.y, Math.abs(moveX), Math.abs(moveY));
             }
@@ -68,4 +68,20 @@ public class SelectMode extends Mode{
         }
         canvas.repaint();
     }
+    @Override
+    public void mouseReleased(MouseEvent e){
+        if (canvas.selectedObj != null) {
+			// move Line object
+			if (tmpInside == "insideLine") {
+				selectedLine = (Line) canvas.selectedObj;
+				//reconnectLine(e.getPoint());
+				
+			}
+		}
+        else{
+            canvas.selectRelease = true;
+        }
+        canvas.repaint();
+    }
+
 }

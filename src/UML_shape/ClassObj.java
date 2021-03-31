@@ -1,7 +1,6 @@
 package UML_shape;
 import java.awt.Graphics;
 
-import javax.management.ObjectName;
 
 public class ClassObj extends Object{
    

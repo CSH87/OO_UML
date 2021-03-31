@@ -23,6 +23,6 @@ public class UI extends JFrame{
         app.setSize(1600,1000);
         app.setLocationRelativeTo(null);
         app.setVisible(true);
-        System.out.println("Hello, World!");
+        
     }
 }

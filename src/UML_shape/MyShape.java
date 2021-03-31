@@ -22,6 +22,9 @@ public abstract class MyShape {
     public String inside(Point p){
 		return null;
 	}
+    public Port getPort(int portIndex){
+		return null;
+	}
     public abstract void draw(Graphics g);
     public void show(Graphics g){}
     public void resetSelectedShape(){}

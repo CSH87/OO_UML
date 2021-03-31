@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.Point;
 
 public class Canvas extends JPanel{
     private static Canvas instance = null;
@@ -25,6 +26,7 @@ public class Canvas extends JPanel{
 	private List<MyShape> shapes = new ArrayList<MyShape>();
 	public Rectangle SelectedArea = new Rectangle();
 	public MyShape tempLine = null;
+	public Boolean selectRelease = false;
 	private Canvas() {
 		// Exists only to defeat instantiation.
 		
@@ -35,6 +37,7 @@ public class Canvas extends JPanel{
 		}
 		return instance;
 	}
+	
 	public void setCurrentMode(){		
 		removeMouseListener((MouseListener) listener);
 		removeMouseMotionListener((MouseMotionListener) listener);
@@ -48,13 +51,22 @@ public class Canvas extends JPanel{
 	public List<MyShape> getShapeList() {
 		return this.shapes;
 	}
-	/*public void reset() {
+	public void reset() {
 		if(selectedObj != null){
 			selectedObj.resetSelectedShape();   // for selected shape inside the group
 			selectedObj = null;
 		}
 		SelectedArea.setBounds(0, 0, 0, 0);
-	}*/
+	}
+	private Boolean checkSelectedArea(MyShape shape){
+		Point p1 = new Point(shape.getX1(), shape.getY1());
+        Point p2 = new Point(shape.getX2(), shape.getY2());
+        if(SelectedArea.contains(p1) && SelectedArea.contains(p2)){
+            return true;
+        }
+        return false;
+	}
+	@Override
 	public void paint(Graphics g) {
 		
 		Dimension dim = getSize();
@@ -65,6 +77,9 @@ public class Canvas extends JPanel{
 		for (int i = shapes.size() - 1; i >= 0; i--) {
 			MyShape shape = shapes.get(i);
 			shape.draw(g);
+			if(!SelectedArea.isEmpty() && checkSelectedArea(shape) && selectRelease){
+				shape.show(g);
+			}
 		}
 		//MyShape shape = shapes.get(shapes.size()-1);
 		//shape.draw(g);

@@ -58,7 +58,7 @@ public class MyToolBar extends JToolBar{
 				holdBtn.setBackground(new Color(60,170,175));
                 canvas.currentMode = toolMode;
 				canvas.setCurrentMode();
-				//canvas.reset();
+				canvas.reset();
 				canvas.repaint();
             }
         }
