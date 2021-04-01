@@ -8,13 +8,13 @@ import java.awt.Rectangle;
 
 
 import UML_shape.MyShape;
-import jdk.internal.vm.compiler.word.Pointer;
 
 public class SelectMode extends Mode{
     private List<MyShape> shapes;
     private Point startP = null;
     private String tmpInside = null;
     private Line selectedLine = null;
+    private String INSIDE_LINE = "insideLine"; 
     @Override
     public void mousePressed(MouseEvent e){
         //initialization
@@ -40,7 +40,7 @@ public class SelectMode extends Mode{
         int moveX = e.getX() - startP.x;
         int moveY = e.getY() - startP.y;
         if(canvas.selectedObj != null){
-            if (tmpInside == "insideLine") {
+            if (tmpInside.equals(INSIDE_LINE)) {
 				selectedLine = (Line) canvas.selectedObj;
 				selectedLine.resetStartEnd(e.getPoint());
 				canvas.tempLine = selectedLine;
@@ -72,10 +72,10 @@ public class SelectMode extends Mode{
     public void mouseReleased(MouseEvent e){
         if (canvas.selectedObj != null) {
 			// move Line object
-			if (tmpInside == "insideLine") {
+			if (tmpInside.equals(INSIDE_LINE)) {
 				selectedLine = (Line) canvas.selectedObj;
-				//reconnectLine(e.getPoint());
-				
+				reconnectLine(e.getPoint());
+				canvas.tempLine = null;
 			}
 		}
         else{
@@ -83,5 +83,20 @@ public class SelectMode extends Mode{
         }
         canvas.repaint();
     }
-
+    private void reconnectLine(Point p){
+        int flag =0;
+        for(int i = 0 ; i < shapes.size() ; i++){
+            MyShape shape = shapes.get(i);
+            String judgeInside = shape.inside(p);
+            if(judgeInside != null && !judgeInside.equals(INSIDE_LINE)){
+                int portIndex = Integer.parseInt(judgeInside);
+                selectedLine.resetPort(shape.getPort(portIndex), selectedLine);
+                selectedLine.resetLocation();
+                flag = 1;
+            }
+        }
+        if(flag == 0){
+            selectedLine.resetLocation();
+        }
+    }
 }

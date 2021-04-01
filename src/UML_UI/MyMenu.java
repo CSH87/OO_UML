@@ -4,6 +4,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 public class MyMenu extends JMenuBar{
     private Canvas canvas;
     public MyMenu(){
@@ -21,21 +22,24 @@ public class MyMenu extends JMenuBar{
         
         menuItem = new JMenuItem("Group");
         menu.add(menuItem);
+        menuItem.addActionListener(new GroupListener());
 
         menuItem = new JMenuItem("Ungroup");
         menu.add(menuItem);
+        menuItem.addActionListener(new UngroupListener());
 
         menuItem = new JMenuItem("Change object name");
         menu.add(menuItem);
+        menuItem.addActionListener(new ChangeNameListener());
     } 
     class UngroupListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            Canvas.removeGroup();
+            canvas.removeGroup();
         }
     }
     class GroupListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            Canvas.Group();
+            canvas.groupShape();
         }
     }    class ChangeNameListener implements ActionListener{
         public void actionPerformed(ActionEvent e){

@@ -1,6 +1,7 @@
 package UML_UI;
 import UML_shape.MyShape;
 import UML_Mode.Mode;
+import UML_shape.Group;
 import java.util.EventListener;
 
 
@@ -77,8 +78,10 @@ public class Canvas extends JPanel{
 		for (int i = shapes.size() - 1; i >= 0; i--) {
 			MyShape shape = shapes.get(i);
 			shape.draw(g);
+			shape.group_selected = false;
 			if(!SelectedArea.isEmpty() && checkSelectedArea(shape) && selectRelease){
 				shape.show(g);
+				shape.group_selected=true;
 			}
 		}
 		//MyShape shape = shapes.get(shapes.size()-1);
@@ -97,6 +100,43 @@ public class Canvas extends JPanel{
 			g.setColor(new Color(20, 150, 200));
 			g.drawRect(SelectedArea.x, SelectedArea.y, SelectedArea.width, SelectedArea.height);
 
+		}
+	}
+	
+	public void groupShape() {
+		Group group = new Group();
+		int MAX_GROUP_NUM=100;
+		MyShape[] tmp = new MyShape[MAX_GROUP_NUM];
+		int cnt=0;
+		for (int i = 0; i < shapes.size(); i++) {
+			MyShape shape = shapes.get(i);
+			if (shape.group_selected) {
+				group.addShapes(shape);
+				tmp[cnt] = shape;
+				cnt++;
+			}
+		}	
+
+		for(int i = 0; i < cnt ; i++){
+			shapes.remove(tmp[i]);
+		}
+		group.setBounds();
+		shapes.add(group);
+	}
+	public void removeGroup() {
+		Group group = (Group) selectedObj;
+		List<MyShape> groupShapes = group.getShapes();
+		for(int i = 0; i < groupShapes.size(); i++){
+			MyShape shape = groupShapes.get(i);
+			shapes.add(shape);
+		}
+		shapes.remove(selectedObj);
+	}
+
+	public void changeObjName(String name) {
+		if(selectedObj != null){
+			selectedObj.changeName(name);
+			repaint();
 		}
 	}
 }

@@ -58,6 +58,17 @@ public abstract class Line extends MyShape{
 		else
 			return null;
 	}
+	public void resetPort(Port port, Line line) {
+		port.addLine(line);
+		if(selectedFlag.equals("start")){
+			this.ports[0].removeLine(line);
+			this.ports[0] = port;
+		}
+		else if(selectedFlag.equals("end")){
+			this.ports[1].removeLine(line);
+			this.ports[1] = port;
+		}	
+	}
 
     
 }
