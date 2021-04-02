@@ -1,8 +1,6 @@
 package UML_shape;
 
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -44,7 +42,7 @@ public abstract class Object extends MyShape{
 		this.y2 = y1 + height;
 		int[] xpoint = {(x1+x2)/2, x2 + offset, (x1+x2)/2, x1 - offset};
 		int[] ypoint = {y1 - offset, (y1+y2)/2, y2+offset, (y1+y2)/2};
-		
+
 		for(int i = 0; i < ports.length; i++) {
 			ports[i].setPort(xpoint[i], ypoint[i], offset);
 			ports[i].resetLines();

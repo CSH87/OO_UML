@@ -1,13 +1,14 @@
 package UML_UI;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import java.awt.Color;
 public class UI extends JFrame{
+    private static final long serialVersionUID = 1L;
+
     private MyToolBar toolbar;
     private Canvas canvas;
     private MyMenu menubar;
     public UI(){
-        canvas = Canvas.getInstance();  
+        canvas = Canvas.getInstance();
         toolbar = new MyToolBar();
         menubar = new MyMenu();
         getContentPane().setLayout(new BorderLayout());
@@ -23,6 +24,6 @@ public class UI extends JFrame{
         app.setSize(1600,1000);
         app.setLocationRelativeTo(null);
         app.setVisible(true);
-        
+
     }
 }

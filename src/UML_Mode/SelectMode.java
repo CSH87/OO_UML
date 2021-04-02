@@ -1,5 +1,7 @@
 package UML_Mode;
 import UML_shape.Line;
+import UML_shape.MyShape;
+
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -7,29 +9,36 @@ import java.util.List;
 import java.awt.Rectangle;
 
 
-import UML_shape.MyShape;
+
 
 public class SelectMode extends Mode{
     private List<MyShape> shapes;
     private Point startP = null;
     private String tmpInside = null;
     private Line selectedLine = null;
-    private String INSIDE_LINE = "insideLine"; 
+    private String INSIDE_LINE = "insideLine";
     @Override
     public void mousePressed(MouseEvent e){
         //initialization
-        canvas.SelectedArea =new Rectangle();
+        canvas.selectedArea =new Rectangle();
         canvas.selectedObj=null;
         tmpInside = null;
         canvas.selectRelease = false;
+        canvas.selectGroup = null;
         startP = e.getPoint();
         shapes = canvas.getShapeList();
-        
+
         for(int i = 0;i<shapes.size();i++){
             MyShape shape = shapes.get(i);
             tmpInside = shape.inside(e.getPoint());
-            if (tmpInside != null){
+            if (tmpInside != null && !tmpInside.equals("insideGroup")){
                 canvas.selectedObj = shape;
+                break;
+            }
+            else if(tmpInside != null && tmpInside.equals("insideGroup")){
+                canvas.selectedObj = shape;
+                shape = shape.getSelectedShape();
+                canvas.selectGroup = shape;
                 break;
             }
         }
@@ -52,18 +61,18 @@ public class SelectMode extends Mode{
 			startP.y = e.getY();
         }
         else{
-            
+
 			if (e.getX() > startP.x && e.getY() > startP.y){
-				canvas.SelectedArea.setBounds(startP.x, startP.y, Math.abs(moveX), Math.abs(moveY));
+				canvas.selectedArea.setBounds(startP.x, startP.y, Math.abs(moveX), Math.abs(moveY));
             }
             else if(e.getX() < startP.x && e.getY() > startP.y){
-				canvas.SelectedArea.setBounds(e.getX(), startP.y, Math.abs(moveX), Math.abs(moveY));
+				canvas.selectedArea.setBounds(e.getX(), startP.y, Math.abs(moveX), Math.abs(moveY));
             }
             else if(e.getX() > startP.x && e.getY() < startP.y){
-                canvas.SelectedArea.setBounds(startP.x, e.getY(), Math.abs(moveX), Math.abs(moveY));
+                canvas.selectedArea.setBounds(startP.x, e.getY(), Math.abs(moveX), Math.abs(moveY));
             }
             else{
-                canvas.SelectedArea.setBounds(e.getX(), e.getY(), Math.abs(moveX), Math.abs(moveY));
+                canvas.selectedArea.setBounds(e.getX(), e.getY(), Math.abs(moveX), Math.abs(moveY));
             }
         }
         canvas.repaint();

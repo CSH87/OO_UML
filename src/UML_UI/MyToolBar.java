@@ -8,13 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.GridLayout;
 public class MyToolBar extends JToolBar{
+    private static final long serialVersionUID = 1L;
+
     private int toolNum = 3;
     private Canvas canvas;
     private JButton holdBtn = null;
     public MyToolBar(){
         canvas = Canvas.getInstance();
-        setLayout(new GridLayout(toolNum, 1));
-        this.setBackground(new Color(83, 85, 87));
+        setLayout(new GridLayout(toolNum, 1,2,2));
+        this.setBackground(Color.white);
         ImageIcon selectIcon = new ImageIcon("img/select.png");
         ToolBtn selectBtn = new ToolBtn("select", selectIcon, new SelectMode());
         add(selectBtn);
@@ -26,21 +28,22 @@ public class MyToolBar extends JToolBar{
         ImageIcon generationIcon = new ImageIcon("img/general.png");
         //ToolBtn generationBtn = new ToolBtn("generalization line", generationIcon, new generationMode());
         //add(generationBtn);
-        
+
         ImageIcon compositionIcon = new ImageIcon("img/composite.png");
         //ToolBtn compositionBtn = new ToolBtn("composition line", compositionIcon, new compositionMode());
         //add(compositionBtn);
-        
+
         ImageIcon classIcon = new ImageIcon("img/class.png");
         ToolBtn classBtn = new ToolBtn("class", classIcon, new ClassObjMode("class"));
         add(classBtn);
 
         ImageIcon useCaseIcon = new ImageIcon("img/usecase.png");
-        //ToolBtn useCaseBtn = new ToolBtn("use case", useCaseIcon, new useCaseMode());
-        //add(useCaseBtn);
+        ToolBtn useCaseBtn = new ToolBtn("use case", useCaseIcon, new ClassObjMode("use case"));
+        add(useCaseBtn);
     }
 
     private class ToolBtn extends JButton{
+        private static final long serialVersionUID = 1L;
         private Mode toolMode;
         public ToolBtn(String toolName, ImageIcon icon, Mode toolMode){
             this.toolMode = toolMode;

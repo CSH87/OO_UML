@@ -7,6 +7,9 @@ public class ShapeFactory {
         if(type.equals("class")){
             return new ClassObj(p.x, p.y);
         }
+        else if (type.equals("use case")){
+            return new Usecase(p.x, p.y);
+        }
         return null;
     }
     public Line createLine(String type, Point startPoint,Point endPoint){

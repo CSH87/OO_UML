@@ -18,7 +18,7 @@ public class LineMode extends Mode{
         this.lineType = lineType;
     }
     @Override
-    public void mousePressed(MouseEvent e){        
+    public void mousePressed(MouseEvent e){
         shapes = canvas.getShapeList();
         startP = pointOnObj(e.getPoint(), "start");
     }
@@ -44,10 +44,10 @@ public class LineMode extends Mode{
                 shapeEnd.getPort(endPortIndex).addLine(line);
                 tmpForShapeIDStart = -1;
                 tmpForShapeIDEnd = -1;
-               
-            }                
 
-        }            
+            }
+
+        }
         canvas.tempLine = null;
         canvas.repaint();
         startP = null;
@@ -58,22 +58,21 @@ public class LineMode extends Mode{
             MyShape shape = shapes.get(i);
             String insideShape = shape.inside(p);
             int portIndex;
-            if(insideShape != null && !insideShape.equals("insideLine")){                
-                
+            if(insideShape != null && !insideShape.equals("insideLine")){
+
 				Point portLocation = new Point();
-                if(insideShape.equals("insideGroup")){  
+                if(insideShape.equals("insideGroup")){
                     System.out.println("insideGroup");
-                    int shapeID = shape.getShapeID();
+                    int shapeID = shape.getShapeID(p);
 					shape = shape.getSelectedShape();
 					portIndex = Integer.parseInt(shape.inside(p));
-                    
                     starOrEnd(shape, portIndex, s, shapeID);
 				}
                 else{
                     portIndex = Integer.parseInt(insideShape);
                     starOrEnd(shape, portIndex, s, i);
-                } 
-   
+                }
+
                 portLocation.setLocation(shape.getPort(portIndex).getCenterX(), shape.getPort(portIndex).getCenterY());
 				return portLocation;
                 }
@@ -82,7 +81,7 @@ public class LineMode extends Mode{
         return null;
     }
     private void starOrEnd(MyShape shape,int portIndex, String s, int i){
-        if(s.equals("start")){                    
+        if(s.equals("start")){
             shapeStart = shape;
             startPortIndex = portIndex;
             tmpForShapeIDStart=i;
@@ -92,6 +91,5 @@ public class LineMode extends Mode{
             endPortIndex = portIndex;
             tmpForShapeIDEnd = i;
         }
-        System.out.println(i);
     }
 }

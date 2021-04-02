@@ -2,10 +2,11 @@ package UML_UI;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 public class MyMenu extends JMenuBar{
+    private static final long serialVersionUID = 1L;
+
     private Canvas canvas;
     public MyMenu(){
         JMenu menu;
@@ -19,7 +20,7 @@ public class MyMenu extends JMenuBar{
         menu = new JMenu("Edit");
         add(menu);
 
-        
+
         menuItem = new JMenuItem("Group");
         menu.add(menuItem);
         menuItem.addActionListener(new GroupListener());
@@ -31,7 +32,7 @@ public class MyMenu extends JMenuBar{
         menuItem = new JMenuItem("Change object name");
         menu.add(menuItem);
         menuItem.addActionListener(new ChangeNameListener());
-    } 
+    }
     class UngroupListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             canvas.removeGroup();
@@ -41,9 +42,10 @@ public class MyMenu extends JMenuBar{
         public void actionPerformed(ActionEvent e){
             canvas.groupShape();
         }
-    }    class ChangeNameListener implements ActionListener{
+    }
+    class ChangeNameListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            ChangeNameListener();
+            canvas.changeNameForm();
         }
     }
 }

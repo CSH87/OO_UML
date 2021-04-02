@@ -13,10 +13,10 @@ public abstract class MyShape {
     }
     public int getX2(){
         return x2;
-    }    
+    }
     public int getY1(){
         return y1;
-    }    
+    }
     public int getY2(){
         return y2;
     }
@@ -30,12 +30,15 @@ public abstract class MyShape {
     public void changeName(String name){}
     public void show(Graphics g){}
     public void resetSelectedShape(){}
-    public void resetLocation(){} 
-	public void resetLocation(int moveX, int moveY){} 
-    public int getShapeID(){
+    public void resetLocation(){}
+	public void resetLocation(int moveX, int moveY){}
+    public int getShapeID(Point p){
         return -1;
     }
     public MyShape getSelectedShape(){
+        return null;
+    }
+    public String getSelectName() {
         return null;
     }
 }

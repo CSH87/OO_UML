@@ -37,7 +37,7 @@ public abstract class Line extends MyShape{
 		this.y1 = (int) ports[0].getCenterY();
 		this.x2 = (int) ports[1].getCenterX();
 		this.y2 = (int) ports[1].getCenterY();
-	}	
+	}
 	@Override
 	public String inside(Point p) {
 		int tolerance = 10;
@@ -67,8 +67,8 @@ public abstract class Line extends MyShape{
 		else if(selectedFlag.equals("end")){
 			this.ports[1].removeLine(line);
 			this.ports[1] = port;
-		}	
+		}
 	}
 
-    
+
 }
