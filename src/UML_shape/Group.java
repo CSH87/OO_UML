@@ -11,16 +11,28 @@ public class Group extends MyShape{
     private List<MyShape> groupShapes = new ArrayList<MyShape>();
     private Rectangle bounds = new Rectangle();
     private MyShape selectedShape = null;
+<<<<<<< HEAD
 
     public void draw(Graphics g){
         for(int i = 0 ; i < groupShapes.size(); i++){
             MyShape shape = groupShapes.get(i);
             shape.draw(g);
+=======
+    private int shapeID = -1;
+    public void draw(Graphics g){
+        for(int i = 0 ; i < groupShapes.size(); i++){
+            MyShape shape = groupShapes.get(i);
+            shape.draw(g); 
+>>>>>>> 679889854f75ee20ca8c6ec0ffe169898548c5c2
         }
     }
     @Override
     public void show(Graphics g) {
+<<<<<<< HEAD
 		int alpha = 85;
+=======
+		int alpha = 85; 
+>>>>>>> 679889854f75ee20ca8c6ec0ffe169898548c5c2
 		int offset = 10;
 		g.setColor(new Color(110, 219, 181, alpha));
 		g.fillRect(bounds.x - offset, bounds.y - offset, bounds.width + offset * 2, bounds.height + offset * 2);
@@ -29,7 +41,11 @@ public class Group extends MyShape{
             MyShape shape = groupShapes.get(i);
             shape.show(g);
         }
+<<<<<<< HEAD
         g.setColor(Color.white);
+=======
+        g.setColor(Color.white); 
+>>>>>>> 679889854f75ee20ca8c6ec0ffe169898548c5c2
 	}
     @Override
     public String inside(Point p){
@@ -50,6 +66,10 @@ public class Group extends MyShape{
         int y2 = Integer.MIN_VALUE;
         for(int i = 0 ; i < groupShapes.size() ; i++){
             MyShape shape = groupShapes.get(i);
+<<<<<<< HEAD
+=======
+            this.shapeID = i;
+>>>>>>> 679889854f75ee20ca8c6ec0ffe169898548c5c2
             //choose the left_up point and right_down point
             if(shape.getX1() < x1){
                 x1 = shape.getX1();
@@ -94,6 +114,7 @@ public class Group extends MyShape{
 		return selectedShape;
 	}
     @Override
+<<<<<<< HEAD
     public int getShapeID(Point p){
         System.out.println("Group getShapeID");
         for(int i =0 ; i< groupShapes.size() ; i ++){
@@ -108,6 +129,13 @@ public class Group extends MyShape{
     public String getSelectName() {
         return selectedShape.objName;
     }
+=======
+    public int getShapeID(){
+        System.out.println("Group getShapeID");
+        return shapeID;
+    }
+
+>>>>>>> 679889854f75ee20ca8c6ec0ffe169898548c5c2
 	public void addShapes(MyShape shape) {
 		groupShapes.add(shape);
 	}
