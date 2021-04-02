@@ -16,6 +16,12 @@ public class ShapeFactory {
         if(type.equals("associate")){
             return new AssociateLine(startPoint.x,startPoint.y,endPoint.x,endPoint.y);
         }
+        else if(type.equals("generalization")){
+            return new GeneralizationLne(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+        }
+        else if(type.equals("composition")){
+            return new CompositionLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+        }
         return null;
     }
 }

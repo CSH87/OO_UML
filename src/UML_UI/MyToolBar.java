@@ -10,12 +10,12 @@ import java.awt.GridLayout;
 public class MyToolBar extends JToolBar{
     private static final long serialVersionUID = 1L;
 
-    private int toolNum = 3;
+    private int toolNum = 6;
     private Canvas canvas;
     private JButton holdBtn = null;
     public MyToolBar(){
         canvas = Canvas.getInstance();
-        setLayout(new GridLayout(toolNum, 1,2,2));
+        setLayout(new GridLayout(toolNum, 1));
         this.setBackground(Color.white);
         ImageIcon selectIcon = new ImageIcon("img/select.png");
         ToolBtn selectBtn = new ToolBtn("select", selectIcon, new SelectMode());
@@ -26,12 +26,12 @@ public class MyToolBar extends JToolBar{
         add(associateBtn);
 
         ImageIcon generationIcon = new ImageIcon("img/general.png");
-        //ToolBtn generationBtn = new ToolBtn("generalization line", generationIcon, new generationMode());
-        //add(generationBtn);
+        ToolBtn generationBtn = new ToolBtn("generalization line", generationIcon, new LineMode("generalization"));
+        add(generationBtn);
 
         ImageIcon compositionIcon = new ImageIcon("img/composite.png");
-        //ToolBtn compositionBtn = new ToolBtn("composition line", compositionIcon, new compositionMode());
-        //add(compositionBtn);
+        ToolBtn compositionBtn = new ToolBtn("composition line", compositionIcon, new LineMode("composition"));
+        add(compositionBtn);
 
         ImageIcon classIcon = new ImageIcon("img/class.png");
         ToolBtn classBtn = new ToolBtn("class", classIcon, new ClassObjMode("class"));
@@ -47,7 +47,7 @@ public class MyToolBar extends JToolBar{
         private Mode toolMode;
         public ToolBtn(String toolName, ImageIcon icon, Mode toolMode){
             this.toolMode = toolMode;
-            setBackground(new Color(0,0,0));
+            setBackground(Color.white);
             setToolTipText(toolName);
             setIcon(icon);
             addActionListener(new toolListener());
@@ -55,7 +55,7 @@ public class MyToolBar extends JToolBar{
         class toolListener implements ActionListener{
             public void actionPerformed(ActionEvent e){
                 if(holdBtn != null){
-                    holdBtn.setBackground(new Color(50,50,50));
+                    holdBtn.setBackground(Color.white);
                 }
                 holdBtn = (JButton) e.getSource();
 				holdBtn.setBackground(new Color(60,170,175));
