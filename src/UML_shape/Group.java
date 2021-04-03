@@ -95,7 +95,6 @@ public class Group extends MyShape{
 	}
     @Override
     public int getShapeID(Point p){
-        System.out.println("Group getShapeID");
         for(int i =0 ; i< groupShapes.size() ; i ++){
             MyShape shape = groupShapes.get(i);
             String judgeInside = shape.inside(p);

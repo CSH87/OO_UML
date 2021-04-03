@@ -41,9 +41,7 @@ public abstract class Line extends MyShape{
 	@Override
 	public String inside(Point p) {
 		int tolerance = 10;
-        Line2D line = new Line2D.Double(x1, y1, x2, y2);
-		double distance=line.ptLineDist(p.getX(), p.getY());
-
+		double distance = distanceCheck(p);
 		if(distance < tolerance) {
 			double distToStart = Math.sqrt(Math.pow((p.x - x1),2) + Math.pow((p.y - y1), 2));
 			double distToEnd = Math.sqrt(Math.pow((p.x - x2),2) + Math.pow((p.y - y2), 2));
@@ -69,6 +67,19 @@ public abstract class Line extends MyShape{
 			this.ports[1] = port;
 		}
 	}
+	private double distanceCheck(Point p) {
+		double distanceBtwStartPoint= Math.sqrt(Math.pow((double)x1 - (double)p.getX(),2)+Math.pow((double)y1 - (double)p.getY(),2));
+		double distanceBtwEndPoint= Math.sqrt(Math.pow((double)x2 - (double)p.getX(),2)+Math.pow((double)y2 - (double)p.getY(),2));
+		double lineDistance = Math.sqrt(Math.pow((double)x1 - (double)x2,2)+Math.pow((double)y1 - (double)y2,2));
+		if(distanceBtwEndPoint > lineDistance || distanceBtwStartPoint > lineDistance){
+			return Math.min(distanceBtwEndPoint,distanceBtwStartPoint);
+		}
+		else{
+			Line2D line = new Line2D.Double(x1, y1, x2, y2);
+			double distance=line.ptLineDist(p.getX(), p.getY());
+			return distance;
+		}
 
+	}
 
 }

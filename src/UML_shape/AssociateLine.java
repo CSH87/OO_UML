@@ -9,6 +9,7 @@ public class AssociateLine extends Line{
         this.x2 = x2;
         this.y1 = y1;
         this.y2 = y2;
+        this.typeName = "Line";
     }
     public void draw(Graphics g){
         g.drawLine(x1, y1, x2, y2);
@@ -16,7 +17,7 @@ public class AssociateLine extends Line{
 		double D = Math.sqrt(dx*dx + dy*dy);
 		double xm = D - arrowW, xn = xm, ym = arrowH, yn = -arrowH, x;
 		double sin = dy/D, cos = dx/D;
-		
+
 		x = xm*cos - ym*sin + x1;
         ym = xm*sin + ym*cos + y1;
         xm = x;

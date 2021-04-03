@@ -36,7 +36,6 @@ public class LineMode extends Mode{
         if(startP != null){
             endP = pointOnObj(e.getPoint(), "end");
             if(endP != null && tmpForShapeIDEnd != tmpForShapeIDStart){
-                System.out.println("test");
                 Line line = factory.createLine(lineType, startP, endP);
                 canvas.addShape(line);
                 line.setPorts(shapeStart.getPort(startPortIndex),shapeEnd.getPort(endPortIndex));
@@ -62,7 +61,6 @@ public class LineMode extends Mode{
 
 				Point portLocation = new Point();
                 if(insideShape.equals("insideGroup")){
-                    System.out.println("insideGroup");
                     int shapeID = shape.getShapeID(p);
 					shape = shape.getSelectedShape();
 					portIndex = Integer.parseInt(shape.inside(p));

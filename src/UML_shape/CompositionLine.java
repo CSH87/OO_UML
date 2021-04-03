@@ -9,6 +9,7 @@ public class CompositionLine extends Line{
     this.x2 = x2;
     this.y1 = y1;
     this.y2 = y2;
+    this.typeName = "Line";
   }
   public void draw(Graphics g){
     int dx = x2 - x1, dy = y2 - y1;

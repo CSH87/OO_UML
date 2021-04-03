@@ -47,6 +47,7 @@ public class MyToolBar extends JToolBar{
         private Mode toolMode;
         public ToolBtn(String toolName, ImageIcon icon, Mode toolMode){
             this.toolMode = toolMode;
+            setSize(50,200);
             setBackground(Color.white);
             setToolTipText(toolName);
             setIcon(icon);

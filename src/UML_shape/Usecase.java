@@ -11,6 +11,7 @@ public class Usecase extends Object{
 		this.x2 = x1 + width;
 		this.y2 = y1 + height;
     this.objName = "Usecase";
+		this.typeName = "Object";
 		setPorts();
 	}
 	public void draw(Graphics g) {

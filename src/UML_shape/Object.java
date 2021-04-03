@@ -17,9 +17,10 @@ public abstract class Object extends MyShape{
     @Override
     public String inside(Point p) {
 		Point center = new Point();
+		int tolerance = 10;
 		center.x = (x1 + x2) / 2;
 		center.y = (y1 + y2) / 2;
-		Point[] points = { new Point(x1, y1), new Point(x2, y1), new Point(x2, y2), new Point(x1, y2) };
+		Point[] points = { new Point(x1-tolerance, y1-tolerance), new Point(x2+tolerance, y1-tolerance), new Point(x2 +tolerance, y2+tolerance), new Point(x1-tolerance, y2+tolerance) };
 		for (int i = 0; i < points.length; i++) {
 			Polygon t = new Polygon();
 			int secondIndex = ((i + 1) % 4);

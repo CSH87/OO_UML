@@ -6,6 +6,7 @@ import java.awt.Point;
 public abstract class MyShape {
     public int x1,x2,y1,y2,width,height;
     public String objName="Object Name";
+    public String typeName = "MyShape";
 	public Font font = new Font(Font.DIALOG, Font.BOLD, 14);
     public boolean group_selected = false;
     public int getX1(){

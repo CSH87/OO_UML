@@ -151,7 +151,7 @@ public class Canvas extends JPanel{
 		repaint();
 	}
 	public void changeNameForm() {
-		if(selectedObj == null){
+		if(selectedObj == null || selectedObj.typeName.equals("Line") || selectGroup.typeName.equals("Line")){
 			return;
 		}
 		String objName = null;
@@ -163,7 +163,6 @@ public class Canvas extends JPanel{
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		if(selectGroup != null){
-			System.out.println("selectGroup");
 			objName = selectGroup.objName;
 		}
 		else{
