@@ -9,6 +9,7 @@ public abstract class MyShape {
     public String typeName = "MyShape";
 	public Font font = new Font(Font.DIALOG, Font.BOLD, 14);
     public boolean group_selected = false;
+    public int shapeID=-1;
     public int getX1(){
         return x1;
     }
@@ -20,6 +21,9 @@ public abstract class MyShape {
     }
     public int getY2(){
         return y2;
+    }
+    public String getFlag(){
+        return null;
     }
     public String inside(Point p){
 		return null;

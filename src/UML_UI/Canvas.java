@@ -137,6 +137,9 @@ public class Canvas extends JPanel{
 		repaint();
 	}
 	public void removeGroup() {
+		if(selectedObj ==null || selectedObj.getSelectedShape() == null){
+			return;
+		}
 		Group group = (Group) selectedObj;
 		if(group == null){
 			return;
@@ -151,7 +154,7 @@ public class Canvas extends JPanel{
 		repaint();
 	}
 	public void changeNameForm() {
-		if(selectedObj == null || selectedObj.typeName.equals("Line") || selectGroup.typeName.equals("Line")){
+		if(selectedObj == null ||  selectedObj.typeName.equals("Line") || (selectGroup != null && selectGroup.typeName.equals("Line"))){
 			return;
 		}
 		String objName = null;
