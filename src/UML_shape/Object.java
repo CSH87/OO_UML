@@ -11,9 +11,10 @@ public abstract class Object extends MyShape{
 
     public abstract void draw(Graphics g);
 
+	@Override
     public void changeName(String name){
 			this.objName = name;
-		}
+	}
     @Override
     public String inside(Point p) {
 		Point center = new Point();
@@ -34,6 +35,7 @@ public abstract class Object extends MyShape{
 		}
 		return null;
 	}
+	@Override
     public void resetLocation(int moveX, int moveY) {
 		int x1 = this.x1 + moveX;
 		int y1 = this.y1 + moveY;

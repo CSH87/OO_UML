@@ -28,8 +28,8 @@ public class Group extends MyShape{
         for(int i = 0 ; i < groupShapes.size() ; i++){
             MyShape shape = groupShapes.get(i);
             shape.show(g);
+            shape.draw(g);
         }
-        g.setColor(Color.white);
 	}
     @Override
     public String inside(Point p){
@@ -104,6 +104,7 @@ public class Group extends MyShape{
         }
         return -1;
     }
+    @Override
     public String getSelectName() {
         return selectedShape.objName;
     }

@@ -16,7 +16,7 @@ public class SelectMode extends Mode{
     private Point startP = null;
     private String tmpInside = null;
     private Line selectedLine = null;
-    private String INSIDE_LINE = "insideLine";
+    private String INSIDE_LINE = "insideLine", INSIDE_GROUP = "insideGroup";
     private MyShape startShapeID = null , endShapeID = null;
     @Override
     public void mousePressed(MouseEvent e){
@@ -32,8 +32,8 @@ public class SelectMode extends Mode{
         for(int i = 0;i<shapes.size();i++){
             MyShape shape = shapes.get(i);
             tmpInside = shape.inside(e.getPoint());
-            if (tmpInside != null && !tmpInside.equals("insideGroup")){
-                if(tmpInside.equals("insideLine")){
+            if (tmpInside != null && !tmpInside.equals(INSIDE_GROUP)){
+                if(tmpInside.equals(INSIDE_LINE)){
                     canvas.selectedObj = shape;
                     String shapeFlag = shape.getFlag();
                     Port startPort = new Port();
@@ -53,7 +53,7 @@ public class SelectMode extends Mode{
                     break;
                 }
             }
-            else if(tmpInside != null && tmpInside.equals("insideGroup")){
+            else if(tmpInside != null && tmpInside.equals(INSIDE_GROUP)){
                 canvas.selectedObj = shape;
                 shape = shape.getSelectedShape();
                 tmpInside = shape.inside(e.getPoint());
@@ -124,20 +124,18 @@ public class SelectMode extends Mode{
             MyShape shape = shapes.get(i);
             String judgeInside = shape.inside(p);
             endShapeID = shape;
-            if(judgeInside != null && judgeInside.equals("insideGroup")){
+            if(judgeInside != null && judgeInside.equals(INSIDE_GROUP)){
                 shape = shape.getSelectedShape();
                 if(!shape.inside(p).equals(INSIDE_LINE)){
                     judgeInside = shape.inside(p);
                     endShapeID = shape;
                 }
             }
-            if(judgeInside != null && !judgeInside.equals(INSIDE_LINE) ){
-                if(endShapeID != startShapeID){
+            if(judgeInside != null && !judgeInside.equals(INSIDE_LINE) && endShapeID != startShapeID){
                     int portIndex = Integer.parseInt(judgeInside);
                     selectedLine.resetPort(shape.getPort(portIndex), selectedLine);
                     selectedLine.resetLocation();
                     flag = 1;
-                }
             }
         }
         if(flag == 0){

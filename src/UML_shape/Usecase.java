@@ -10,7 +10,7 @@ public class Usecase extends Object{
 		this.y1 = y1;
 		this.x2 = x1 + width;
 		this.y2 = y1 + height;
-    this.objName = "Usecase";
+    	this.objName = "Usecase";
 		this.typeName = "Object";
 		setPorts();
 	}

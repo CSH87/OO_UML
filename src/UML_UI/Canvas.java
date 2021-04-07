@@ -28,7 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 public class Canvas extends JPanel{
 	private static final long serialVersionUID = 1L;
-  private static Canvas instance = null;
+  	private static Canvas instance = null;
 	private EventListener listener = null;
 	public Mode currentMode = null;
 	public MyShape selectedObj = null;
@@ -83,8 +83,7 @@ public class Canvas extends JPanel{
 		g.setColor(Color.white);
 		g.fillRect(0, 0, dim.width, dim.height);
 		g.setColor(Color.black);
-		//instance.setBackground(Color.black);
-		for (int i = shapes.size() - 1; i >= 0; i--) {
+		for (int i = 0; i < shapes.size(); i++) {
 			MyShape shape = shapes.get(i);
 			shape.draw(g);
 			shape.group_selected = false;
@@ -93,8 +92,6 @@ public class Canvas extends JPanel{
 				shape.group_selected=true;
 			}
 		}
-		//MyShape shape = shapes.get(shapes.size()-1);
-		//shape.draw(g);
 		/* paint dragged line */
 		if (tempLine != null) {
 			tempLine.draw(g);

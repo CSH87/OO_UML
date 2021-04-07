@@ -13,12 +13,11 @@ public class LineMode extends Mode{
     private List<MyShape> shapes;
     private MyShape shapeStart = null ,shapeEnd = null;
     private int startPortIndex =-1, endPortIndex = -1;
-    private int tmpForShapeIDStart =-1, tmpForShapeIDEnd = -1;
     public LineMode(String lineType){
         this.lineType = lineType;
     }
     @Override
-    public void mousePressed(MouseEvent e){
+    public void mousePressed(MouseEvent e){        
         shapes = canvas.getShapeList();
         startP = pointOnObj(e.getPoint(), "start");
     }
@@ -35,18 +34,16 @@ public class LineMode extends Mode{
         Point endP = null;
         if(startP != null){
             endP = pointOnObj(e.getPoint(), "end");
-            if(endP != null && tmpForShapeIDEnd != tmpForShapeIDStart){
+            if(endP != null && shapeStart != shapeEnd){
+
                 Line line = factory.createLine(lineType, startP, endP);
                 canvas.addShape(line);
                 line.setPorts(shapeStart.getPort(startPortIndex),shapeEnd.getPort(endPortIndex));
                 shapeStart.getPort(startPortIndex).addLine(line);
-                shapeEnd.getPort(endPortIndex).addLine(line);
-                tmpForShapeIDStart = -1;
-                tmpForShapeIDEnd = -1;
+                shapeEnd.getPort(endPortIndex).addLine(line);               
+            }                
 
-            }
-
-        }
+        }            
         canvas.tempLine = null;
         canvas.repaint();
         startP = null;
@@ -57,20 +54,19 @@ public class LineMode extends Mode{
             MyShape shape = shapes.get(i);
             String insideShape = shape.inside(p);
             int portIndex;
-            if(insideShape != null && !insideShape.equals("insideLine")){
-
+            if(insideShape != null && !insideShape.equals("insideLine")){                
+                
 				Point portLocation = new Point();
-                if(insideShape.equals("insideGroup")){
-                    int shapeID = shape.getShapeID(p);
+                if(insideShape.equals("insideGroup")){  
 					shape = shape.getSelectedShape();
 					portIndex = Integer.parseInt(shape.inside(p));
-                    starOrEnd(shape, portIndex, s, shapeID);
+                    starOrEnd(shape, portIndex, s, i);
 				}
                 else{
                     portIndex = Integer.parseInt(insideShape);
                     starOrEnd(shape, portIndex, s, i);
-                }
-
+                } 
+   
                 portLocation.setLocation(shape.getPort(portIndex).getCenterX(), shape.getPort(portIndex).getCenterY());
 				return portLocation;
                 }
@@ -79,15 +75,13 @@ public class LineMode extends Mode{
         return null;
     }
     private void starOrEnd(MyShape shape,int portIndex, String s, int i){
-        if(s.equals("start")){
+        if(s.equals("start")){                    
             shapeStart = shape;
             startPortIndex = portIndex;
-            tmpForShapeIDStart=i;
         }
         else if(s.equals("end")){
             shapeEnd = shape;
             endPortIndex = portIndex;
-            tmpForShapeIDEnd = i;
         }
     }
 }

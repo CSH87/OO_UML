@@ -7,31 +7,32 @@ import java.awt.Color;
 
 public abstract class Line extends MyShape {
 	public abstract void draw(Graphics g);
-
+	private String START = "start", END = "end"; 
 	public Port[] ports = new Port[2];
 	private String selectedFlag = null;
-
-	public Port getPort(int index){
-		return ports[index];
-	}
-	public String getFlag(){
-		return selectedFlag;
-	}
+	
 	public void setPorts(Port p1, Port p2) {
 		this.ports[0] = p1;
 		this.ports[1] = p2;
 	}
 
 	public void resetStartEnd(Point p) {
-		if (selectedFlag.equals("start")) {
+		if (selectedFlag.equals(START)) {
 			this.x1 = p.x;
 			this.y1 = p.y;
-		} else if (selectedFlag.equals("end")) {
+		} else if (selectedFlag.equals(END)) {
 			this.x2 = p.x;
 			this.y2 = p.y;
 		}
 	}
-
+	@Override
+	public Port getPort(int index){
+		return ports[index];
+	}
+	@Override
+	public String getFlag(){
+		return selectedFlag;
+	}
 	@Override
 	public void show(Graphics g) {
 		g.setColor(new Color(50, 171, 175));
@@ -55,9 +56,9 @@ public abstract class Line extends MyShape {
 			double distToStart = Math.sqrt(Math.pow((p.x - x1), 2) + Math.pow((p.y - y1), 2));
 			double distToEnd = Math.sqrt(Math.pow((p.x - x2), 2) + Math.pow((p.y - y2), 2));
 			if (distToStart < distToEnd) {
-				selectedFlag = "start";
+				selectedFlag = START;
 			} else {
-				selectedFlag = "end";
+				selectedFlag = END;
 			}
 			return "insideLine";
 		} else
@@ -66,10 +67,10 @@ public abstract class Line extends MyShape {
 
 	public void resetPort(Port port, Line line) {
 		port.addLine(line);
-		if (selectedFlag.equals("start")) {
+		if (selectedFlag.equals(START)) {
 			this.ports[0].removeLine(line);
 			this.ports[0] = port;
-		} else if (selectedFlag.equals("end")) {
+		} else if (selectedFlag.equals(END)) {
 			this.ports[1].removeLine(line);
 			this.ports[1] = port;
 		}
