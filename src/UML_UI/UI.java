@@ -20,7 +20,7 @@ public class UI extends JFrame{
     public static void main(String[] args) throws Exception {
         UI app = new UI();
         app.setTitle("UML Editor");
-        //app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setSize(1600,1000);
         app.setLocationRelativeTo(null);
         app.setVisible(true);
