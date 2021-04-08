@@ -27,6 +27,10 @@ public class Group extends MyShape{
 		g.setColor(Color.black);
         for(int i = 0 ; i < groupShapes.size() ; i++){
             MyShape shape = groupShapes.get(i);
+            if(shape.typeName.equals("Line")){
+                shape.show(g);
+                continue;
+            }
             shape.show(g);
             shape.draw(g);
         }

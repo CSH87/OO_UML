@@ -59,7 +59,10 @@ public class LineMode extends Mode{
 				Point portLocation = new Point();
                 if(insideShape.equals("insideGroup")){  
 					shape = shape.getSelectedShape();
-					portIndex = Integer.parseInt(shape.inside(p));
+                    if(shape.inside(p).equals("insideLine")){
+                        return null;
+                    }
+                    portIndex = Integer.parseInt(shape.inside(p));
                     starOrEnd(shape, portIndex, s, i);
 				}
                 else{

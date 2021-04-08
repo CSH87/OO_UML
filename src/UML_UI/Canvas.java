@@ -137,6 +137,7 @@ public class Canvas extends JPanel{
 		if(selectedObj ==null || selectedObj.getSelectedShape() == null){
 			return;
 		}
+		//if select group object is null then return
 		Group group = (Group) selectedObj;
 		if(group == null){
 			return;
