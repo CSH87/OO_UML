@@ -12,6 +12,9 @@ public class Group extends MyShape{
     private Rectangle bounds = new Rectangle();
     private MyShape selectedShape = null;
 
+    public void setSelectedShape(){
+        selectedShape = groupShapes.get(0);
+    }
     public void draw(Graphics g){
         for(int i = 0 ; i < groupShapes.size(); i++){
             MyShape shape = groupShapes.get(i);

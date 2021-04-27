@@ -8,7 +8,7 @@ public class UI extends JFrame{
     private Canvas canvas;
     private MyMenu menubar;
     public UI(){
-        canvas = Canvas.getInstance();
+        canvas = Canvas.getInstance();  
         toolbar = new MyToolBar();
         menubar = new MyMenu();
         getContentPane().setLayout(new BorderLayout());

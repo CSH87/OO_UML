@@ -1,18 +1,18 @@
 package UML_UI;
 import UML_shape.MyShape;
+import UML_Mode.DeleteMode;
+import UML_Mode.KeyboardMode;
 import UML_Mode.Mode;
 import UML_shape.Group;
 import java.util.EventListener;
-
-
-
-
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
-
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.TextArea;
 import java.util.List;
 import java.awt.Dimension;
 import javax.swing.JPanel;
@@ -30,16 +30,17 @@ public class Canvas extends JPanel{
 	private static final long serialVersionUID = 1L;
   	private static Canvas instance = null;
 	private EventListener listener = null;
+	private DeleteMode keylistener = null;
 	public Mode currentMode = null;
 	public MyShape selectedObj = null;
 	public MyShape selectGroup = null;
+	private TextArea text = null;
 	private List<MyShape> shapes = new ArrayList<MyShape>();
 	public Rectangle selectedArea = new Rectangle();
 	public MyShape tempLine = null;
 	public Boolean selectRelease = false;
 	private Canvas() {
-		// Exists only to defeat instantiation.
-
+		// Exists only to defeat instantiation.	
 	}
     public static Canvas getInstance() {
 		if (instance == null) {
@@ -47,7 +48,15 @@ public class Canvas extends JPanel{
 		}
 		return instance;
 	}
-
+	public void removeShape(MyShape s){
+		shapes.remove(s);
+	}
+	public void setKeyMode(){
+		keylistener = new DeleteMode();
+		addKeyListener(keylistener);
+		setFocusable(true);
+		requestFocusInWindow();
+	}
 	public void setCurrentMode(){
 		removeMouseListener((MouseListener) listener);
 		removeMouseMotionListener((MouseMotionListener) listener);
@@ -123,13 +132,16 @@ public class Canvas extends JPanel{
 				cnt++;
 			}
 		}
-
+		if(cnt==0){
+			return;
+		}
 		for(int i = 0; i < cnt ; i++){
 			shapes.remove(tmp[i]);
 		}
 		group.setBounds();
 		shapes.add(group);
 		selectedObj = group;
+		selectedObj.setSelectedShape();
 		selectedArea = new Rectangle();
 		repaint();
 	}
@@ -139,9 +151,9 @@ public class Canvas extends JPanel{
 		}
 		//if select group object is null then return
 		Group group = (Group) selectedObj;
-		if(group == null){
+		/*if(group == null){
 			return;
-		}
+		}*/
 		List<MyShape> groupShapes = group.getShapes();
 		for(int i = 0; i < groupShapes.size(); i++){
 			MyShape shape = groupShapes.get(i);

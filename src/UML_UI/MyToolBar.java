@@ -17,6 +17,8 @@ public class MyToolBar extends JToolBar{
         canvas = Canvas.getInstance();
         setLayout(new GridLayout(toolNum, 1));
         this.setBackground(Color.white);
+        
+
         ImageIcon selectIcon = new ImageIcon("img/select.png");
         ToolBtn selectBtn = new ToolBtn("select", selectIcon, new SelectMode());
         add(selectBtn);
@@ -45,8 +47,10 @@ public class MyToolBar extends JToolBar{
     private class ToolBtn extends JButton{
         private static final long serialVersionUID = 1L;
         private Mode toolMode;
+        private String toolName;
         public ToolBtn(String toolName, ImageIcon icon, Mode toolMode){
             this.toolMode = toolMode;
+            this.toolName = toolName;
             setSize(50,200);
             setBackground(Color.white);
             setToolTipText(toolName);
@@ -57,6 +61,9 @@ public class MyToolBar extends JToolBar{
             public void actionPerformed(ActionEvent e){
                 if(holdBtn != null){
                     holdBtn.setBackground(Color.white);
+                }
+                if(toolName.equals("select")){
+                    canvas.setKeyMode();
                 }
                 holdBtn = (JButton) e.getSource();
 				holdBtn.setBackground(new Color(60,170,175));

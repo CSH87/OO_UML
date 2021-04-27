@@ -46,4 +46,5 @@ public abstract class MyShape {
     public String getSelectName() {
         return null;
     }
+    public void setSelectedShape(){}
 }
